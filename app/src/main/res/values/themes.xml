@@ -15,7 +15,7 @@
 
     <!-- Base application theme. -->
 
-    <style name="PetPetTheme" parent="Theme.MaterialComponents.Light">
+    <style name="PetPetTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/pink</item>
         <item name="colorPrimaryVariant">@color/dark_pink</item>

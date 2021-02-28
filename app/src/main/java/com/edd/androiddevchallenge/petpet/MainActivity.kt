@@ -23,6 +23,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.edd.androiddevchallenge.petpet.ui.overview.OverviewScreen
 import com.edd.androiddevchallenge.petpet.ui.theme.PetPetTheme
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PetPetTheme {
-                MyApp()
+                PetPet()
             }
         }
     }
@@ -38,16 +39,14 @@ class MainActivity : AppCompatActivity() {
 
 // Start building your app here!
 @Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set.d.. GO!")
-    }
+fun PetPet() {
+    OverviewScreen()
 }
 
 @Preview(widthDp = 360, heightDp = 640)
 @Composable
 fun Preview() {
     PetPetTheme {
-        MyApp()
+        PetPet()
     }
 }

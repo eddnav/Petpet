@@ -15,29 +15,20 @@
  */
 package com.edd.androiddevchallenge.petpet.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-
 
 private val palette = lightColors(
     primary = pink,
     primaryVariant = darkPink,
     secondary = lightGreen,
     background = lightYellow,
-    surface = lightYellow,
-
-        /* Other default colors to override
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    surface = lightYellow
 )
 
 @Composable
-fun PetPetTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun PetPetTheme(content: @Composable() () -> Unit) {
     MaterialTheme(
         colors = palette,
         typography = typography,
