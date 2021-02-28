@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.edd.androiddevchallenge.petpet.ui.theme
 
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
 
-val shapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(0.dp)
-)
+val lightPink = Color(0xffffcccb)
+val pink = Color(0xffef9a9a)
+val darkPink = Color(0xffba6b6c)
+val lightGreen = Color(0xffdcedc8)
+val lightYellow = Color(0xfffffde7)

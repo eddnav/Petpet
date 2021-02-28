@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge
+package com.edd.androiddevchallenge.petpet
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -23,13 +23,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.edd.androiddevchallenge.petpet.ui.theme.PetPetTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyTheme {
+            PetPetTheme {
                 MyApp()
             }
         }
@@ -40,22 +40,14 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+        Text(text = "Ready... Set.d.. GO!")
     }
 }
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
+@Preview(widthDp = 360, heightDp = 640)
 @Composable
-fun LightPreview() {
-    MyTheme {
-        MyApp()
-    }
-}
-
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    MyTheme(darkTheme = true) {
+fun Preview() {
+    PetPetTheme {
         MyApp()
     }
 }
