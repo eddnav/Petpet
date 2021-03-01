@@ -22,9 +22,7 @@ import androidx.compose.runtime.Composable
 private val palette = lightColors(
     primary = pink,
     primaryVariant = darkPink,
-    secondary = lightGreen,
-    background = lightYellow,
-    surface = lightYellow
+    secondary = lightGreen
 )
 
 @Composable

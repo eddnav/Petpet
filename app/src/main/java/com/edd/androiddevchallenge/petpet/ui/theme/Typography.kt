@@ -29,8 +29,23 @@ val typography = Typography(
         fontSize = 16.sp
     ),
     h1 = TextStyle(
-        fontFamily = FontFamily.Cursive,
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Black,
         fontSize = 32.sp
+    ),
+    h2 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp
+    ),
+    subtitle1 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
     )
 )
