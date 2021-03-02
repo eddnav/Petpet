@@ -13,4 +13,13 @@
 
 <resources>
     <string name="app_name">PetPet</string>
+
+    <plurals name="label_months_old">
+        <item quantity="one">%1$d month old</item>
+        <item quantity="other">%1$d months old</item>
+    </plurals>
+    <plurals name="label_years_old">
+        <item quantity="one">%1$d year old</item>
+        <item quantity="other">%1$d years old</item>
+    </plurals>
 </resources>

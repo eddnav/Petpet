@@ -18,13 +18,11 @@ package com.edd.androiddevchallenge.petpet
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.edd.androiddevchallenge.petpet.ui.overview.OverviewScreen
 import com.edd.androiddevchallenge.petpet.ui.theme.PetPetTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,10 +35,9 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-// Start building your app here!
 @Composable
 fun PetPet() {
-    OverviewScreen()
+    OverviewScreen(viewModel())
 }
 
 @Preview(widthDp = 360, heightDp = 640)
