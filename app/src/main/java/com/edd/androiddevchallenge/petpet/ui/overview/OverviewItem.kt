@@ -9,7 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -22,6 +21,7 @@ import com.edd.androiddevchallenge.petpet.domain.model.AnimalType
 import com.edd.androiddevchallenge.petpet.domain.model.Gender
 import com.edd.androiddevchallenge.petpet.domain.model.Pet
 import com.edd.androiddevchallenge.petpet.domain.model.getAssociatedIconRes
+import com.edd.androiddevchallenge.petpet.ui.theme.darkGray
 import com.edd.androiddevchallenge.petpet.ui.theme.gray
 import com.edd.androiddevchallenge.petpet.ui.theme.lightGreen
 import com.edd.androiddevchallenge.petpet.util.extension.getTimeOldString
@@ -31,7 +31,7 @@ import java.util.*
 
 // TODO: Make a ConstraintLayout version of this.
 @Composable
-fun OverviewItem(pet: Pet, onSelected: (Pet) -> Unit) {
+fun OverviewItem(pet: Pet, onClick: (Pet) -> Unit) {
     Box {
         Column {
             Spacer(Modifier.height(8.dp))
@@ -39,60 +39,66 @@ fun OverviewItem(pet: Pet, onSelected: (Pet) -> Unit) {
                 Spacer(Modifier.width(100.dp))
                 Card(
                     modifier = Modifier
+                        // TODO: Card ripple bug?
+                        // Seems card do not clip the ripple to their shapes,
+                        // probably unintentional.
                         .clickable {
-                            onSelected(pet)
+                            onClick(pet)
                         },
                     elevation = 4.dp
                 ) {
                     Column(
                         Modifier
                             .defaultMinSize(Dp.Unspecified, 140.dp)
-                            .fillMaxWidth()
                             .padding(56.dp, 16.dp, 16.dp, 16.dp)
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Text(
                                 text = pet.name,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                                 style = MaterialTheme.typography.h3
                             )
-                            Box(Modifier.weight(1f)) {
-                                Spacer(Modifier.fillMaxWidth())
+                            Row {
+                                Image(
+                                    modifier = Modifier
+                                        .size(20.dp, 20.dp),
+                                    painter = painterResource(pet.type.getAssociatedIconRes()),
+                                    contentDescription = null,
+                                    colorFilter = ColorFilter.tint(gray)
+                                )
+                                Spacer(Modifier.width(4.dp))
+                                Image(
+                                    modifier = Modifier
+                                        .size(20.dp, 20.dp),
+                                    painter = painterResource(pet.gender.getAssociatedIconRes()),
+                                    contentDescription = null
+                                )
                             }
-                            Image(
-                                modifier = Modifier
-                                    .size(16.dp, 16.dp),
-                                painter = painterResource(pet.type.getAssociatedIconRes()),
-                                contentDescription = null,
-                                colorFilter = ColorFilter.tint(gray)
-                            )
-                            Spacer(Modifier.width(4.dp))
-                            Image(
-                                modifier = Modifier
-                                    .size(16.dp, 16.dp),
-                                painter = painterResource(pet.gender.getAssociatedIconRes()),
-                                contentDescription = null
-                            )
                         }
                         Spacer(Modifier.height(2.dp))
-                        Text(
-                            text = pet.breed,
-                            color = gray,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.subtitle1
-                        )
-                        Box(Modifier.weight(1f)) {
-                            Spacer(Modifier.fillMaxHeight())
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = pet.breed,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                style = MaterialTheme.typography.subtitle1
+                            )
+                            Text(
+                                text = pet.dateOfBirth.getTimeOldString(LocalContext.current),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                style = MaterialTheme.typography.subtitle1,
+                                color = darkGray
+                            )
                         }
-                        Text(
-                            text = pet.dateOfBirth.getTimeOldString(LocalContext.current),
-                            color = gray,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.subtitle1
-                        )
                     }
                 }
             }
@@ -105,10 +111,9 @@ fun OverviewItem(pet: Pet, onSelected: (Pet) -> Unit) {
         ) {
             CoilImage(
                 modifier = Modifier
-                    .clip(MaterialTheme.shapes.medium)
                     .fillMaxSize()
                     .clickable {
-                        onSelected(pet)
+                        onClick(pet)
                     },
                 data = pet.photoUrl,
                 contentDescription = null,
@@ -127,12 +132,13 @@ private fun OverviewItemPreview() {
             UUID.randomUUID(),
             AnimalType.DOG,
             "Tina",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "Golden Retriever",
             LocalDate.of(2019, 12, 20),
             Gender.FEMALE,
             listOf(),
             ""
         ),
-        onSelected = {}
+        onClick = {}
     )
 }

@@ -29,9 +29,12 @@ import com.edd.androiddevchallenge.petpet.ui.theme.pink
 import java.time.LocalDate
 import java.util.*
 
+// TODO: Image on back navigation bug
+// The clicked item seems to be recomposed (?) once back navigation
+// to this screen occurs, showing a small flash.
 @Composable
 fun OverviewScreen(navController: NavController, overviewViewModel: OverviewViewModel) {
-    OverviewScreenContent(pets = overviewViewModel.pets, onOverviewItemSelected = {
+    OverviewScreenContent(pets = overviewViewModel.pets, onOverviewItemClick = {
         // TODO: Nav transitions are not working with Compose yet, add some
         navController
             .navigate(PetDetailRouteFactory.create(it.id.toString()))
@@ -39,41 +42,13 @@ fun OverviewScreen(navController: NavController, overviewViewModel: OverviewView
 }
 
 @Composable
-private fun DecorationBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White)
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Image(
-            modifier = Modifier
-                .size(32.dp, 32.dp),
-            painter = painterResource(R.drawable.ic_paw),
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(pink)
-        )
-        Spacer(Modifier.width(2.dp))
-        Text(
-            text = stringResource(R.string.app_name),
-            color = pink,
-            textAlign = TextAlign.Center,
-            fontFamily = FontFamily.Cursive,
-            style = MaterialTheme.typography.h1
-        )
-    }
-}
-
-@Composable
-private fun OverviewScreenContent(pets: List<Pet>, onOverviewItemSelected: (Pet) -> Unit) {
+private fun OverviewScreenContent(pets: List<Pet>, onOverviewItemClick: (Pet) -> Unit) {
     Column {
         DecorationBar()
         Box {
             LazyColumn(contentPadding = PaddingValues(16.dp, 26.dp, 16.dp, 16.dp)) {
                 items(pets.size) {
-                    OverviewItem(pets[it], onOverviewItemSelected)
+                    OverviewItem(pets[it], onOverviewItemClick)
                     if (it != pets.size - 1) {
                         Spacer(
                             Modifier
@@ -96,6 +71,34 @@ private fun OverviewScreenContent(pets: List<Pet>, onOverviewItemSelected: (Pet)
     }
 }
 
+@Composable
+private fun DecorationBar() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            modifier = Modifier
+                .size(32.dp, 32.dp),
+            painter = painterResource(R.drawable.ic_paw),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(pink)
+        )
+        Spacer(Modifier.width(2.dp))
+        Text(
+            text = stringResource(R.string.app_name),
+            textAlign = TextAlign.Center,
+            fontFamily = FontFamily.Cursive,
+            style = MaterialTheme.typography.h1,
+            color = pink
+        )
+    }
+}
+
 @Preview
 @Composable
 private fun OverviewScreenContentPreview() {
@@ -105,6 +108,7 @@ private fun OverviewScreenContentPreview() {
                 UUID.randomUUID(),
                 AnimalType.DOG,
                 "Tina",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 "Golden Retriever",
                 LocalDate.of(2019, 12, 20),
                 Gender.FEMALE,
@@ -116,12 +120,13 @@ private fun OverviewScreenContentPreview() {
                 AnimalType.CAT,
                 "Retro",
                 "Siamese",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 LocalDate.of(2019, 12, 20),
                 Gender.MALE,
                 listOf(),
                 ""
             )
         ),
-        onOverviewItemSelected = {}
+        onOverviewItemClick = {}
     )
 }

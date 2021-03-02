@@ -56,7 +56,7 @@ fun PetPet() {
                 ?: error("No ${PetDetailRoute.PET_ARG} argument found")
             // TODO: Figure out how to use Koin with Compose
             // TODO: Delete the factory class
-            PetDetailScreen(viewModel(factory = PetDetailViewModelFactory(petId)))
+            PetDetailScreen(navController, viewModel(factory = PetDetailViewModelFactory(petId)))
         }
     }
 }

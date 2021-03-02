@@ -13,6 +13,7 @@
 
 <resources>
     <string name="app_name">PetPet</string>
+    <string name="label_adopt_now">Adopt Now</string>
 
     <plurals name="label_months_old">
         <item quantity="one">%1$d month old</item>

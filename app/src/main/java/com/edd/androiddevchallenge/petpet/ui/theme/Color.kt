@@ -17,7 +17,8 @@ package com.edd.androiddevchallenge.petpet.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val gray = Color(0xFF777777)
+val gray = Color(0xFFC4C4C4)
+val darkGray = Color(0xFF555555)
 val pink = Color(0xFFEF9A9A)
 val darkPink = Color(0xffBA6B6C)
 val lightGreen = Color(0xFFDCEDC8)

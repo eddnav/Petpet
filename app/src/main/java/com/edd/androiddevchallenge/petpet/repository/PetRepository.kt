@@ -15,6 +15,11 @@ object PetRepository {
             UUID.randomUUID(),
             AnimalType.DOG,
             "Faye",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                    "Sed viverra fermentum lorem ac facilisis. " +
+                    "Curabitur nisl orci, posuere eu vehicula sed, tempor ac est. " +
+                    "Duis id leo eu quam rutrum feugiat. " +
+                    "Sed sodales urna metus, quis semper mauris viverra ac.",
             "Collie",
             LocalDate.of(2020, 9, 26),
             Gender.FEMALE,
@@ -25,6 +30,9 @@ object PetRepository {
             UUID.randomUUID(),
             AnimalType.DOG,
             "Caleb",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                    "Sed viverra fermentum lorem ac facilisis. " +
+                    "Sed sodales urna metus, quis semper mauris viverra ac.",
             "Pug",
             LocalDate.of(2021, 1, 20),
             Gender.MALE,
@@ -35,6 +43,9 @@ object PetRepository {
             UUID.randomUUID(),
             AnimalType.DOG,
             "Tina",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                    "Sed viverra fermentum lorem ac facilisis. " +
+                    "Sed sodales urna metus, quis semper mauris viverra ac.",
             "Golden Retriever",
             LocalDate.of(2019, 12, 20),
             Gender.FEMALE,
@@ -43,11 +54,13 @@ object PetRepository {
         )
     )
 
-   private val cats = listOf(
+    private val cats = listOf(
         Pet(
             UUID.randomUUID(),
             AnimalType.CAT,
             "Dream",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                    "Sed sodales urna metus, quis semper mauris viverra ac.",
             "Siamese",
             LocalDate.of(2020, 1, 23),
             Gender.FEMALE,
@@ -58,6 +71,7 @@ object PetRepository {
             UUID.randomUUID(),
             AnimalType.CAT,
             "Sally",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "Brittish Shorthair",
             LocalDate.of(2019, 4, 10),
             Gender.FEMALE,
@@ -71,6 +85,10 @@ object PetRepository {
             UUID.randomUUID(),
             AnimalType.BIRD,
             "Tee",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                    "Sed viverra fermentum lorem ac facilisis. " +
+                    "Curabitur nisl orci, posuere eu vehicula sed, tempor ac est. " +
+                    "Duis id leo eu quam rutrum feugiat.",
             "Conure",
             LocalDate.of(2020, 12, 30),
             Gender.MALE,
