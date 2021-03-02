@@ -6,5 +6,5 @@ import com.edd.androiddevchallenge.petpet.repository.PetRepository
 class OverviewViewModel : ViewModel() {
     // TODO: Use dependency injection to get this repository
     // TODO: Use mutableStateOf
-    val petList = PetRepository.pets
+    val pets = PetRepository.pets
 }

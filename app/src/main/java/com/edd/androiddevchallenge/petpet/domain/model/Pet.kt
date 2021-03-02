@@ -1,8 +1,10 @@
 package com.edd.androiddevchallenge.petpet.domain.model
 
 import java.time.LocalDate
+import java.util.*
 
 data class Pet(
+    val id: UUID,
     val type: AnimalType,
     val name: String,
     val breed: String,

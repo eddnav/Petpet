@@ -4,13 +4,15 @@ import com.edd.androiddevchallenge.petpet.domain.model.AnimalType
 import com.edd.androiddevchallenge.petpet.domain.model.Gender
 import com.edd.androiddevchallenge.petpet.domain.model.Pet
 import java.time.LocalDate
+import java.util.*
 
 
-// TODO: Fix singleton, fake repository :)
+// TODO: Move away from this singleton, fake repository :)
 object PetRepository {
 
     private val dogs = listOf(
         Pet(
+            UUID.randomUUID(),
             AnimalType.DOG,
             "Faye",
             "Collie",
@@ -20,6 +22,7 @@ object PetRepository {
             "https://images.unsplash.com/photo-1536684084687-d5ab14f6f711?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=999&q=80"
         ),
         Pet(
+            UUID.randomUUID(),
             AnimalType.DOG,
             "Caleb",
             "Pug",
@@ -29,6 +32,7 @@ object PetRepository {
             "https://images.unsplash.com/photo-1604813539828-11f08d8f32f6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1932&q=80"
         ),
         Pet(
+            UUID.randomUUID(),
             AnimalType.DOG,
             "Tina",
             "Golden Retriever",
@@ -41,6 +45,7 @@ object PetRepository {
 
    private val cats = listOf(
         Pet(
+            UUID.randomUUID(),
             AnimalType.CAT,
             "Dream",
             "Siamese",
@@ -50,6 +55,7 @@ object PetRepository {
             "https://images.unsplash.com/photo-1612537563846-e22eb8e55cc2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=933&q=80"
         ),
         Pet(
+            UUID.randomUUID(),
             AnimalType.CAT,
             "Sally",
             "Brittish Shorthair",
@@ -62,6 +68,7 @@ object PetRepository {
 
     private val birds = listOf(
         Pet(
+            UUID.randomUUID(),
             AnimalType.BIRD,
             "Tee",
             "Conure",
@@ -77,4 +84,6 @@ object PetRepository {
         cats,
         birds
     ).flatten().shuffled()
+
+    fun getPet(id: String) = pets.firstOrNull { UUID.fromString(id) == it.id }
 }

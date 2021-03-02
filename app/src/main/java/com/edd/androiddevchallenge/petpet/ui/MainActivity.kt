@@ -24,9 +24,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.edd.androiddevchallenge.petpet.ui.Routes.DETAIL
-import com.edd.androiddevchallenge.petpet.ui.Routes.OVERVIEW
 import com.edd.androiddevchallenge.petpet.ui.overview.OverviewScreen
+import com.edd.androiddevchallenge.petpet.ui.petdetail.PetDetailScreen
+import com.edd.androiddevchallenge.petpet.ui.petdetail.PetDetailViewModelFactory
+import com.edd.androiddevchallenge.petpet.ui.route.Route.OverviewRoute
+import com.edd.androiddevchallenge.petpet.ui.route.Route.PetDetailRoute
 import com.edd.androiddevchallenge.petpet.ui.theme.PetPetTheme
 
 class MainActivity : AppCompatActivity() {
@@ -45,12 +47,16 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun PetPet() {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = OVERVIEW) {
-        composable(OVERVIEW) {
-            OverviewScreen(viewModel())
+    NavHost(navController, startDestination = OverviewRoute.value) {
+        composable(OverviewRoute.value) {
+            OverviewScreen(navController, viewModel())
         }
-        composable(DETAIL) {
-            OverviewScreen(viewModel())
+        composable(PetDetailRoute.value) {
+            val petId = it.arguments?.getString(PetDetailRoute.PET_ARG)
+                ?: error("No ${PetDetailRoute.PET_ARG} argument found")
+            // TODO: Figure out how to use Koin with Compose
+            // TODO: Delete the factory class
+            PetDetailScreen(viewModel(factory = PetDetailViewModelFactory(petId)))
         }
     }
 }

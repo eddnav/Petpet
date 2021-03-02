@@ -1,6 +1,7 @@
 package com.edd.androiddevchallenge.petpet.ui.overview
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -26,18 +27,25 @@ import com.edd.androiddevchallenge.petpet.ui.theme.lightGreen
 import com.edd.androiddevchallenge.petpet.util.extension.getTimeOldString
 import dev.chrisbanes.accompanist.coil.CoilImage
 import java.time.LocalDate
+import java.util.*
 
 // TODO: Make a ConstraintLayout version of this.
 @Composable
-fun OverviewItem(pet: Pet) {
+fun OverviewItem(pet: Pet, onSelected: (Pet) -> Unit) {
     Box {
         Column {
             Spacer(Modifier.height(8.dp))
             Row {
                 Spacer(Modifier.width(100.dp))
-                Card(elevation = 4.dp) {
+                Card(
+                    modifier = Modifier
+                        .clickable {
+                            onSelected(pet)
+                        },
+                    elevation = 4.dp
+                ) {
                     Column(
-                        modifier = Modifier
+                        Modifier
                             .defaultMinSize(Dp.Unspecified, 140.dp)
                             .fillMaxWidth()
                             .padding(56.dp, 16.dp, 16.dp, 16.dp)
@@ -49,14 +57,8 @@ fun OverviewItem(pet: Pet) {
                                 overflow = TextOverflow.Ellipsis,
                                 style = MaterialTheme.typography.h3
                             )
-                            Box(
-                                modifier = Modifier
-                                    .weight(1f)
-                            ) {
-                                Spacer(
-                                    Modifier
-                                        .fillMaxWidth()
-                                )
+                            Box(Modifier.weight(1f)) {
+                                Spacer(Modifier.fillMaxWidth())
                             }
                             Image(
                                 modifier = Modifier
@@ -65,7 +67,7 @@ fun OverviewItem(pet: Pet) {
                                 contentDescription = null,
                                 colorFilter = ColorFilter.tint(gray)
                             )
-                            Spacer(modifier = Modifier.width(4.dp))
+                            Spacer(Modifier.width(4.dp))
                             Image(
                                 modifier = Modifier
                                     .size(16.dp, 16.dp),
@@ -73,7 +75,7 @@ fun OverviewItem(pet: Pet) {
                                 contentDescription = null
                             )
                         }
-                        Spacer(modifier = Modifier.height(2.dp))
+                        Spacer(Modifier.height(2.dp))
                         Text(
                             text = pet.breed,
                             color = gray,
@@ -81,14 +83,8 @@ fun OverviewItem(pet: Pet) {
                             overflow = TextOverflow.Ellipsis,
                             style = MaterialTheme.typography.subtitle1
                         )
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                        ) {
-                            Spacer(
-                                Modifier
-                                    .fillMaxHeight()
-                            )
+                        Box(Modifier.weight(1f)) {
+                            Spacer(Modifier.fillMaxHeight())
                         }
                         Text(
                             text = pet.dateOfBirth.getTimeOldString(LocalContext.current),
@@ -105,16 +101,19 @@ fun OverviewItem(pet: Pet) {
             modifier = Modifier
                 .size(140.dp),
             elevation = 4.dp,
-            backgroundColor = lightGreen
+            backgroundColor = lightGreen,
         ) {
             CoilImage(
-                fadeIn = true,
-                contentDescription = null,
-                data = pet.photoUrl,
-                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .clip(MaterialTheme.shapes.medium)
                     .fillMaxSize()
+                    .clickable {
+                        onSelected(pet)
+                    },
+                data = pet.photoUrl,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                fadeIn = true
             )
         }
     }
@@ -122,16 +121,18 @@ fun OverviewItem(pet: Pet) {
 
 @Preview
 @Composable
-fun OverviewItemPreview() {
+private fun OverviewItemPreview() {
     OverviewItem(
-        Pet(
+        pet = Pet(
+            UUID.randomUUID(),
             AnimalType.DOG,
             "Tina",
             "Golden Retriever",
             LocalDate.of(2019, 12, 20),
             Gender.FEMALE,
-            listOf("Curious", "Loyal"),
-            "https://images.unsplash.com/photo-1611498491685-abb3e359cf69?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80"
-        )
+            listOf(),
+            ""
+        ),
+        onSelected = {}
     )
 }
