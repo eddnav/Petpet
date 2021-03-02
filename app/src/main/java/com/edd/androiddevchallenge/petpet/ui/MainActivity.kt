@@ -13,31 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.edd.androiddevchallenge.petpet
+package com.edd.androiddevchallenge.petpet.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.edd.androiddevchallenge.petpet.ui.Routes.DETAIL
+import com.edd.androiddevchallenge.petpet.ui.Routes.OVERVIEW
 import com.edd.androiddevchallenge.petpet.ui.overview.OverviewScreen
 import com.edd.androiddevchallenge.petpet.ui.theme.PetPetTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             PetPetTheme {
                 PetPet()
             }
+
         }
     }
 }
 
 @Composable
 fun PetPet() {
-    OverviewScreen(viewModel())
+    val navController = rememberNavController()
+    NavHost(navController, startDestination = OVERVIEW) {
+        composable(OVERVIEW) {
+            OverviewScreen(viewModel())
+        }
+        composable(DETAIL) {
+            OverviewScreen(viewModel())
+        }
+    }
 }
 
 @Preview(widthDp = 360, heightDp = 640)
