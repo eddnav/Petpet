@@ -26,6 +26,8 @@ import com.edd.androiddevchallenge.petpet.domain.model.Gender
 import com.edd.androiddevchallenge.petpet.domain.model.Pet
 import com.edd.androiddevchallenge.petpet.ui.route.PetDetailRouteFactory
 import com.edd.androiddevchallenge.petpet.ui.theme.pink
+import dev.chrisbanes.accompanist.insets.LocalWindowInsets
+import dev.chrisbanes.accompanist.insets.toPaddingValues
 import java.time.LocalDate
 import java.util.*
 
@@ -43,7 +45,7 @@ fun OverviewScreen(navController: NavController, overviewViewModel: OverviewView
 
 @Composable
 private fun OverviewScreenContent(pets: List<Pet>, onOverviewItemClick: (Pet) -> Unit) {
-    Column {
+    Column(Modifier.padding(LocalWindowInsets.current.systemBars.toPaddingValues())) {
         DecorationBar()
         Box {
             LazyColumn(contentPadding = PaddingValues(16.dp, 26.dp, 16.dp, 16.dp)) {

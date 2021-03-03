@@ -16,7 +16,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -27,15 +26,14 @@ import com.edd.androiddevchallenge.petpet.domain.model.AnimalType
 import com.edd.androiddevchallenge.petpet.domain.model.Gender
 import com.edd.androiddevchallenge.petpet.domain.model.Pet
 import com.edd.androiddevchallenge.petpet.domain.model.getAssociatedIconRes
-import com.edd.androiddevchallenge.petpet.ui.common.Button
-import com.edd.androiddevchallenge.petpet.ui.common.FloatingBackButton
-import com.edd.androiddevchallenge.petpet.ui.common.HeartButton
-import com.edd.androiddevchallenge.petpet.ui.common.Tags
+import com.edd.androiddevchallenge.petpet.ui.common.*
 import com.edd.androiddevchallenge.petpet.ui.theme.darkGray
 import com.edd.androiddevchallenge.petpet.ui.theme.gray
 import com.edd.androiddevchallenge.petpet.ui.theme.lightGreen
 import com.edd.androiddevchallenge.petpet.util.extension.getTimeOldString
 import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.insets.LocalWindowInsets
+import dev.chrisbanes.accompanist.insets.toPaddingValues
 import java.time.LocalDate
 import java.util.*
 
@@ -48,7 +46,9 @@ fun PetDetailScreen(navController: NavController, viewModel: PetDetailViewModel)
 
 @Composable
 private fun PetDetailScreenContent(pet: Pet, onBackClicked: () -> Unit) {
-    Box {
+    val navBarInset =
+        LocalWindowInsets.current.systemBars.toPaddingValues().calculateBottomPadding()
+    Box(Modifier.padding(0.dp, 0.dp, 0.dp, navBarInset)) {
         Column(
             Modifier
                 .fillMaxSize()
@@ -116,11 +116,15 @@ private fun PetDetailScreenContent(pet: Pet, onBackClicked: () -> Unit) {
             }
         }
     }
-    FloatingBackButton(
-        modifier = Modifier
-            .offset(16.dp, 16.dp),
-        onClick = onBackClicked
-    )
+    Column {
+        StatusBarSpacer()
+        Spacer(Modifier.height(16.dp))
+        FloatingBackButton(
+            modifier = Modifier
+                .offset(16.dp, 0.dp),
+            onClick = onBackClicked
+        )
+    }
 }
 
 @Composable

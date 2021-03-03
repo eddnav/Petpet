@@ -20,6 +20,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,16 +31,19 @@ import com.edd.androiddevchallenge.petpet.ui.petdetail.PetDetailViewModelFactory
 import com.edd.androiddevchallenge.petpet.ui.route.Route.OverviewRoute
 import com.edd.androiddevchallenge.petpet.ui.route.Route.PetDetailRoute
 import com.edd.androiddevchallenge.petpet.ui.theme.PetPetTheme
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             PetPetTheme {
-                PetPet()
+                ProvideWindowInsets {
+                    PetPet()
+                }
             }
-
         }
     }
 }
