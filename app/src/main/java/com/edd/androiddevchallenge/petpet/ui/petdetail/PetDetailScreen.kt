@@ -103,7 +103,6 @@ private fun PetDetailScreenContent(pet: Pet, onBackClicked: () -> Unit) {
                         // TODO
                     })
                     Spacer(Modifier.width(32.dp))
-                    // TODO: Extract to a primary button composable
                     Button(
                         modifier = Modifier
                             .weight(1f),
